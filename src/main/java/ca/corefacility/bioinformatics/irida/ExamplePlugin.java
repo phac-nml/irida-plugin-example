@@ -33,7 +33,7 @@ public class ExamplePlugin extends Plugin {
 	public static class PluginInfo implements IridaPlugin {
 
 		@Override
-		public Properties getMessages() {
+		public Properties getMessages() throws IridaPluginException {
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
