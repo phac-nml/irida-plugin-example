@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iridaWorkflow>
-  <id>c07a0d4c-fb53-4183-8ded-298f8a4decca</id>
-  <name>FirstLines</name>
+  <id>79d90ca8-00ae-441b-b5c7-193c9e85a968</id>
+  <name>ReadInfo</name>
   <version>0.1.0</version>
-  <analysisType>FIRST_LINES</analysisType>
+  <analysisType>READ_INFO</analysisType>
   <inputs>
-    <sequenceReadsPaired>fastq_paired</sequenceReadsPaired>
+    <sequenceReadsPaired>sequence_reads</sequenceReadsPaired>
     <requiresSingleSample>true</requiresSingleSample>
   </inputs>
   <parameters>
-    <parameter name="show-beginning1-1-lineNum" defaultValue="4">
-      <toolParameter toolId="Show beginning1" parameterName="lineNum"/>
+    <parameter name="Grep1-4-pattern" defaultValue="^@">
+      <toolParameter toolId="Grep1" parameterName="pattern"/>
     </parameter>
   </parameters>
   <outputs>
-    <output name="first-lines.txt" fileName="first-lines.txt"/>
+    <output name="hash.txt" fileName="hash.txt"/>
+    <output name="read-count.txt" fileName="read-count.txt"/>
   </outputs>
   <toolRepositories/>
 </iridaWorkflow>

@@ -33,22 +33,22 @@ public class ExamplePlugin extends Plugin {
 		 * Gets the particular {@link AnalysisType} object for this workflow.
 		 * This should correspond to the <strong>analysisType</strong> entry in the <strong>irida_workflow.xml</strong> file.
 		 * 
-		 * <pre>{@code <analysisType>FIRST_LINES</analysisType>}</pre>
+		 * <pre>{@code <analysisType>READ_INFO</analysisType>}</pre>
 		 */
 		@Override
 		public AnalysisType getAnalysisType() {
-			return new AnalysisType("FIRST_LINES");
+			return new AnalysisType("READ_INFO");
 		}
 
 		/**
 		 * Gets the particular workflow id.
 		 * This should correspond to the <strong>id</strong> entry in the <strong>irida_workflow.xml</strong> file.
 		 * 
-		 * <pre>{@code <id>c07a0d4c-fb53-4183-8ded-298f8a4decca</id>}</pre>
+		 * <pre>{@code <id>79d90ca8-00ae-441b-b5c7-193c9e85a968</id>}</pre>
 		 */
 		@Override
 		public UUID getDefaultWorkflowUUID() {
-			return UUID.fromString("c07a0d4c-fb53-4183-8ded-298f8a4decca");
+			return UUID.fromString("79d90ca8-00ae-441b-b5c7-193c9e85a968");
 		}
 		
 		/*********************************************************************************************************************
@@ -62,7 +62,7 @@ public class ExamplePlugin extends Plugin {
 		 */
 		@Override
 		public Optional<Color> getBackgroundColor() {
-			return Optional.of(Color.decode("#7fcdbb"));
+			return Optional.of(Color.decode("#dd1c77"));
 		}
 
 		/**
