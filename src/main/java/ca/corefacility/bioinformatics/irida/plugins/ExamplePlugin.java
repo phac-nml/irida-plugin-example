@@ -12,6 +12,7 @@ import ca.corefacility.bioinformatics.irida.model.workflow.analysis.type.Analysi
 import ca.corefacility.bioinformatics.irida.pipeline.results.updater.AnalysisSampleUpdater;
 import ca.corefacility.bioinformatics.irida.service.sample.MetadataTemplateService;
 import ca.corefacility.bioinformatics.irida.service.sample.SampleService;
+import ca.corefacility.bioinformatics.irida.service.workflow.IridaWorkflowsService;
 
 /**
  * An example {@link IridaPlugin} implementation
@@ -24,6 +25,11 @@ public class ExamplePlugin extends Plugin {
 		super(wrapper);
 	}
 
+	/**
+	 * This class defines information about this particular plugin. On start-up,
+	 * IRIDA will make use of the information provided by this class to integrate
+	 * the plugin pipeline.
+	 */
 	@Extension
 	public static class PluginInfo implements IridaPlugin {
 
@@ -102,14 +108,16 @@ public class ExamplePlugin extends Plugin {
 		 *                                metadata templates.
 		 * @param sampleService           An IRIDA service to manipulate and save
 		 *                                information associated with a {@link Sample}.
+		 * @param iridaWorkflowsService   An IRIDA service for getting information about
+		 *                                the workflow.
 		 * 
 		 * @return An {@link Optional} {@link AnalysisSampleUpdater} used to update
 		 *         metadata from the pipeline results.
 		 */
 		@Override
 		public Optional<AnalysisSampleUpdater> getUpdater(MetadataTemplateService metadataTemplateService,
-				SampleService sampleService) throws IridaPluginException {
-			return Optional.of(new ExamplePluginUpdater(metadataTemplateService, sampleService));
+				SampleService sampleService, IridaWorkflowsService iridaWorkflowsService) throws IridaPluginException {
+			return Optional.of(new ExamplePluginUpdater(metadataTemplateService, sampleService, iridaWorkflowsService));
 		}
 	}
 }
