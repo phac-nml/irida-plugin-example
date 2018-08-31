@@ -47,6 +47,56 @@ And, you should be able to save and view these results in the IRIDA metadata tab
 
 ![example-plugin-metadata.png][]
 
+# Using as a template for developing a plugin
+
+In order to use this project as a template for developing your own pluginable pipeline there are a few places you will need to change.
+
+## 1. [src/main/java/ca/corefacility/bioinformatics/irida/plugins/ExamplePlugin.java][example-plugin-java]
+
+This is the main class you will need to modify for your pipeline. The class can be located in any package you wish, and can have any name you wish.  You will want to implement the two methods which are indicated as **required** in this file.  At minimum you should have a class looking like:
+
+```java
+public class ExamplePlugin extends Plugin {
+
+	public static final AnalysisType MY_ANALYSIS_TYPE = new AnalysisType("MY_ANALYSIS_TYPE");
+
+	public ExamplePlugin(PluginWrapper wrapper) {
+		super(wrapper);
+	}
+
+	@Extension
+	public static class PluginInfo implements IridaPlugin {
+
+		@Override
+		public AnalysisType getAnalysisType() {
+			return MY_ANALYSIS_TYPE;
+		}
+
+		@Override
+		public UUID getDefaultWorkflowUUID() {
+			return UUID.fromString("79d90ca8-00ae-441b-b5c7-193c9e85a968");
+		}
+	}
+}
+```
+
+### 2. Place necessary workflow files in [src/main/resources/workflows][workflows-dir]
+
+The structure of this directory will look like:
+
+```
+workflows/
+└── 0.1.0
+    ├── irida_workflow_structure.ga
+    ├── irida_workflow.xml
+    └── messages_en.properties
+```
+
+* The directory `0.1.0` corresponds to all files for a particular version of a workflow (in this case `0.1.0`). Old versions should be kept in this directory so that IRIDA can load up information about these workflows.
+* The file `irida_workflow_structure.ga` is a [Galaxy][] workflow file which is uploaded to a Galaxy instance by IRIDA before execution.
+* The file `irida_workflow.xml` contains information about this particular workflow used by IRIDA.
+* The file `messages_en.properties` contains messages which will be displayed in the IRIDA UI.
+
 # Dependencies
 
 The following dependendencies are required in order to make use of this plugin.
@@ -56,7 +106,10 @@ The following dependendencies are required in order to make use of this plugin.
 
 [maven]: https://maven.apache.org/
 [IRIDA]: http://irida.ca/
+[Galaxy]: https://galaxyproject.org/
 [Java]: https://www.java.com/
+[workflows-dir]: src/main/resources/workflows
+[example-plugin-java]: src/main/java/ca/corefacility/bioinformatics/irida/plugins/ExamplePlugin.java
 [irida-setup]: https://irida.corefacility.ca/documentation/administrator/index.html
 [example-plugin-results.png]: doc/images/example-plugin-results.png
 [example-plugin-pipeline.png]: doc/images/example-plugin-pipeline.png
