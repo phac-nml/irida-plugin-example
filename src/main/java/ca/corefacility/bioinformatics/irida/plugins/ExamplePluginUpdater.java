@@ -25,6 +25,13 @@ import ca.corefacility.bioinformatics.irida.service.sample.MetadataTemplateServi
 import ca.corefacility.bioinformatics.irida.service.sample.SampleService;
 import ca.corefacility.bioinformatics.irida.service.workflow.IridaWorkflowsService;
 
+/**
+ * This implements a class used to perform post-processing on the analysis
+ * pipeline results to extract information to write into the IRIDA metadata
+ * tables. Please see
+ * <https://github.com/phac-nml/irida/blob/development/src/main/java/ca/corefacility/bioinformatics/irida/pipeline/results/AnalysisSampleUpdater.java>
+ * or the README.md file in this project for more details.
+ */
 public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 
 	private final MetadataTemplateService metadataTemplateService;
@@ -36,7 +43,7 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 	 * 
 	 * @param metadataTemplateService The metadata template service.
 	 * @param sampleService           The sample service.
-	 * @param iridaWorkflowsService   The {@link IridaWorkflowsService}.
+	 * @param iridaWorkflowsService   The irida workflows service.
 	 */
 	public ExamplePluginUpdater(MetadataTemplateService metadataTemplateService, SampleService sampleService,
 			IridaWorkflowsService iridaWorkflowsService) {
@@ -67,8 +74,11 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 					"samples size=" + samples.size() + " is not 1 for analysisSubmission=" + analysis.getId());
 		}
 
+		// extract the 1 and only sample (if more than 1, would have thrown an exception
+		// above)
 		final Sample sample = samples.iterator().next();
 
+		// extracts paths to the analysis result files
 		AnalysisOutputFile hashAnalysisFile = analysis.getAnalysis().getAnalysisOutputFile("hash.txt");
 		Path hashFile = hashAnalysisFile.getFile();
 
@@ -78,10 +88,13 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 		try {
 			Map<String, MetadataEntry> metadataEntries = new HashMap<>();
 
+			// get information about the workflow (e.g., version and name)
 			IridaWorkflow iridaWorkflow = iridaWorkflowsService.getIridaWorkflow(analysis.getWorkflowId());
 			String workflowVersion = iridaWorkflow.getWorkflowDescription().getVersion();
 			String workflowName = iridaWorkflow.getWorkflowDescription().getName();
 
+			// gets information from the "hash.txt" output file and constructs metadata
+			// objects
 			Map<String, String> hashValues = parseHashFile(hashFile);
 			for (String hashType : hashValues.keySet()) {
 				final String hashValue = hashValues.get(hashType);
@@ -94,6 +107,8 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 				metadataEntries.put(key, hashEntry);
 			}
 
+			// gets read count information from "read-count.txt" file and builds metadata
+			// objects
 			Long readCount = parseReadCount(readCountFile);
 			PipelineProvidedMetadataEntry readCountEntry = new PipelineProvidedMetadataEntry(readCount.toString(),
 					"text", analysis);
@@ -105,7 +120,10 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 			Map<MetadataTemplateField, MetadataEntry> metadataMap = metadataTemplateService
 					.getMetadataMap(metadataEntries);
 
+			// merges with existing sample metadata
 			sample.mergeMetadata(metadataMap);
+
+			// does an update of the sample metadata
 			sampleService.updateFields(sample.getId(), ImmutableMap.of("metadata", sample.getMetadata()));
 		} catch (IOException e) {
 			throw new PostProcessingException("Error parsing hash file", e);
@@ -118,7 +136,7 @@ public class ExamplePluginUpdater implements AnalysisSampleUpdater {
 	 * Parses out the read count from the passed file.
 	 * 
 	 * @param readCountFile The file containing the read count. The file contents
-	 *                      should look like:
+	 *                      should look like (representing 10 reads):
 	 * 
 	 *                      <pre>
 	 *                      10

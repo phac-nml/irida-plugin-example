@@ -15,10 +15,16 @@ import ca.corefacility.bioinformatics.irida.service.sample.SampleService;
 import ca.corefacility.bioinformatics.irida.service.workflow.IridaWorkflowsService;
 
 /**
- * An example {@link IridaPlugin} implementation
+ * An example {@link IridaPlugin} implementation which will extract some
+ * information from the sequencing reads.
  */
 public class ExamplePlugin extends Plugin {
 
+	/**
+	 * The {@link AnalysisType} used by this plugin. This wraps around a string and
+	 * is used to store the type of the analysis pipeline (which should be unique
+	 * for each pipeline).
+	 */
 	public static final AnalysisType READ_INFO = new AnalysisType("READ_INFO");
 
 	public ExamplePlugin(PluginWrapper wrapper) {

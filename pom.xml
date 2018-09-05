@@ -10,6 +10,7 @@
 
 	<!-- Please fill out these properties with information about your particular plugin -->
 	<properties>
+		<!-- Information used to define properties about a plugin. Please see the PF4J docs for more details https://pf4j.org/doc/getting-started.html -->
 		<plugin.id>example-plugin</plugin.id>
 		<plugin.class>ca.corefacility.bioinformatics.irida.plugins.ExamplePlugin</plugin.class>
 		<plugin.version>0.1.0</plugin.version>
@@ -27,6 +28,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<!-- Dependencies used to build this plugin package -->
 	<dependencies>
 		<dependency>
 			<groupId>ca.corefacility.bioinformatics</groupId>
@@ -43,6 +45,7 @@
 		</dependency>
 	</dependencies>
 
+	<!-- You should normally not have to modify any of the below information -->
 	<build>
 		<plugins>
 			<plugin>
