@@ -15,10 +15,10 @@
 		<plugin.version>0.1.0</plugin.version>
 		<plugin.provider>Aaron Petkau</plugin.provider>
 		<plugin.dependencies></plugin.dependencies>
-		<plugin.requires>1.0.0</plugin.requires>
+		<plugin.requires.runtime>1.0.0</plugin.requires.runtime>
 
 		<!-- The version of IRIDA your plugin must be compiled against. -->
-		<irida.version>0.23.0-SNAPSHOT</irida.version>
+		<irida.version.compiletime>0.23.0-SNAPSHOT</irida.version.compiletime>
 		
 		<!-- Version of the pf4j dependency -->
 		<pf4j.version>2.4.0</pf4j.version>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>ca.corefacility.bioinformatics</groupId>
 			<artifactId>irida</artifactId>
-			<version>${irida.version}</version>
+			<version>${irida.version.compiletime}</version>
 			<classifier>classes</classifier>
 		</dependency>
 
@@ -68,7 +68,7 @@
 							<Plugin-Id>${plugin.id}</Plugin-Id>
 							<Plugin-Provider>${plugin.provider}</Plugin-Provider>
 							<Plugin-Version>${plugin.version}</Plugin-Version>
-							<Plugin-Requires>${plugin.requires}</Plugin-Requires>
+							<Plugin-Requires>${plugin.requires.runtime}</Plugin-Requires>
 						</manifestEntries>
 					</archive>
 				</configuration>
