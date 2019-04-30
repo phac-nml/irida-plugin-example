@@ -25,7 +25,7 @@ This project contains an example pipeline implemented as a plugin for the [IRIDA
 
 # Building/Packaging
 
-Building and packaging this code is accomplished using [Apache Maven][maven]. However, you will first need to install [IRIDA][] to your local Maven repository.
+Building and packaging this code is accomplished using [Apache Maven][maven]. However, you will first need to install [IRIDA][] to your local Maven repository. The version of IRIDA you install will have to correspond to the version found in the `irida.version.compiletime` property in the [pom.xml][] file of this project. Right now, this is IRIDA version `19.01.3`.
 
 ## Installing IRIDA to local Maven repository
 
@@ -38,7 +38,13 @@ git clone https://github.com/phac-nml/irida.git
 cd irida
 ```
 
-2. Install IRIDA to local repository
+2. Checkout appropriate version of IRIDA
+
+```bash
+git checkout 19.01.3
+```
+
+3. Install IRIDA to local repository
 
 ```bash
 mvn clean install -DskipTests
