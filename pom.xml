@@ -13,7 +13,7 @@
 		<!-- Information used to define properties about a plugin. Please see the PF4J docs for more details https://pf4j.org/doc/getting-started.html -->
 		<plugin.id>example-plugin</plugin.id>
 		<plugin.class>ca.corefacility.bioinformatics.irida.plugins.ExamplePlugin</plugin.class>
-		<plugin.version>0.1.0</plugin.version>
+		<plugin.version>0.3.0</plugin.version>
 		<plugin.provider>Aaron Petkau</plugin.provider>
 		<plugin.dependencies></plugin.dependencies>
 		<plugin.requires.runtime>1.1.0</plugin.requires.runtime>
