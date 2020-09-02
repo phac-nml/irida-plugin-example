@@ -25,7 +25,7 @@ This project contains an example pipeline implemented as a plugin for the [IRIDA
 
 # Building/Packaging
 
-Building and packaging this code is accomplished using [Apache Maven][maven]. However, you will first need to install [IRIDA][] to your local Maven repository. The version of IRIDA you install will have to correspond to the version found in the `irida.version.compiletime` property in the [pom.xml][] file of this project. Right now, this is IRIDA version `19.01.3`.
+Building and packaging this code is accomplished using [Apache Maven][maven]. However, you will first need to install [IRIDA][] to your local Maven repository. The version of IRIDA you install will have to correspond to the version found in the `irida.version.compiletime` property in the [pom.xml][] file of this project. Right now, this is IRIDA version `20.09`.
 
 ## Installing IRIDA to local Maven repository
 
@@ -41,7 +41,7 @@ cd irida
 2. Checkout appropriate version of IRIDA
 
 ```bash
-git checkout 19.01.3
+git checkout 20.09
 ```
 
 3. Install IRIDA to local repository
@@ -78,8 +78,8 @@ And, you should be able to save and view these results in the IRIDA metadata tab
 
 The following dependencies are required in order to make use of this plugin.
 
-* [IRIDA][] >= 0.23.0
-* [Java][] >= 1.8 and [Maven][maven] (for building)
+* [IRIDA][] >= 20.09
+* [Java][] >= 11 and [Maven][maven] (for building)
 
 # Using as a template for developing a plugin
 
@@ -268,7 +268,7 @@ The purpose of each method is as follows:
 
 ## 3. (Optional) Implement an [Updater][irida-updater] class
 
-An [Updater][irida-updater] class is used to perform post-processing on the resulting files, primarily intended to write back pipeline results into the IRIDA metadata system. Please see the [ExamplePluginUpdater.java][irida-updater] for an example implementation, or the built-in implementations in <https://github.com/phac-nml/irida/tree/development/src/main/java/ca/corefacility/bioinformatics/irida/pipeline/results/impl>. Implementing this class is optional for your pipeline.
+An [Updater][irida-updater] class is used to perform post-processing on the resulting files, primarily intended to write back pipeline results into the IRIDA metadata system. Please see the [ExamplePluginUpdater.java][irida-updater] for an example implementation, or the built-in implementations in <https://github.com/phac-nml/irida/tree/development/src/main/java/ca/corefacility/bioinformatics/irida/pipeline/results/updater/impl>. Implementing this class is optional for your pipeline.
 
 If you do implement this class, you will also want to make sure to update the `messages_en.properties` file with an entry like:
 
@@ -308,7 +308,7 @@ The `properties` section contains additional information you will have to update
 <plugin.dependencies></plugin.dependencies>
 <plugin.requires.runtime>1.0.0</plugin.requires.runtime>
 
-<irida.version.compiletime>0.23.0-SNAPSHOT</irida.version.compiletime>
+<irida.version.compiletime>20.09</irida.version.compiletime>
 ```
 
 The `<plugin.*>` entries contain information about your particular plugin as defined by [PF4J][pf4j-start].
