@@ -74,7 +74,7 @@ public class ExamplePlugin extends Plugin {
 		 */
 		@Override
 		public UUID getDefaultWorkflowUUID() {
-			return UUID.fromString("79d90ca8-00ae-441b-b5c7-193c9e85a968");
+			return UUID.fromString("77708005-f855-44c9-bd0b-8293edbd4caa");
 		}
 
 		/*******************************************************************************

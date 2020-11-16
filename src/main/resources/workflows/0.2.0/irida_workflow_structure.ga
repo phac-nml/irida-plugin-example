@@ -1,0 +1,246 @@
+{
+  "a_galaxy_workflow" : "true",
+  "annotation" : "",
+  "format-version" : "0.1",
+  "name" : "Read info v2",
+  "steps" : {
+    "0" : {
+      "workflow_outputs" : [ {
+        "label" : null,
+        "output_name" : "output",
+        "uuid" : "982f8e53-9f96-4bfb-94bc-f768b2913995"
+      } ],
+      "input_connections" : { },
+      "label" : "sequence_reads",
+      "id" : 0,
+      "tool_state" : "{\"optional\": false, \"collection_type\": \"list:paired\"}",
+      "errors" : null,
+      "position" : {
+        "left" : 200,
+        "top" : 302
+      },
+      "name" : "Input dataset collection",
+      "uuid" : "a8f6f8d7-f52b-4566-8759-9a8f3bfddd6b",
+      "outputs" : [ ],
+      "type" : "data_collection_input",
+      "tool_version" : null,
+      "annotation" : "",
+      "inputs" : [ {
+        "description" : "",
+        "name" : "sequence_reads"
+      } ],
+      "content_id" : null,
+      "tool_id" : null
+    },
+    "1" : {
+      "workflow_outputs" : [ ],
+      "input_connections" : {
+        "input" : {
+          "id" : 0,
+          "output_name" : "output"
+        }
+      },
+      "label" : null,
+      "id" : 1,
+      "tool_state" : "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "errors" : null,
+      "position" : {
+        "left" : 462,
+        "top" : 298
+      },
+      "name" : "Unzip Collection",
+      "uuid" : "89f4d0c0-668a-4836-8bf7-850a4e43417c",
+      "outputs" : [ {
+        "name" : "forward",
+        "type" : "input"
+      }, {
+        "name" : "reverse",
+        "type" : "input"
+      } ],
+      "type" : "tool",
+      "tool_version" : "1.0.0",
+      "annotation" : "",
+      "inputs" : [ ],
+      "post_job_actions" : {
+        "HideDatasetActionforward" : {
+          "action_arguments" : { },
+          "action_type" : "HideDatasetAction",
+          "output_name" : "forward"
+        },
+        "HideDatasetActionreverse" : {
+          "action_arguments" : { },
+          "action_type" : "HideDatasetAction",
+          "output_name" : "reverse"
+        }
+      },
+      "content_id" : "__UNZIP_COLLECTION__",
+      "tool_id" : "__UNZIP_COLLECTION__"
+    },
+    "2" : {
+      "workflow_outputs" : [ ],
+      "input_connections" : {
+        "input1" : {
+          "id" : 1,
+          "output_name" : "forward"
+        },
+        "queries_0|input2" : {
+          "id" : 1,
+          "output_name" : "reverse"
+        }
+      },
+      "label" : null,
+      "id" : 2,
+      "tool_state" : "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"input2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "errors" : null,
+      "position" : {
+        "left" : 719.5,
+        "top" : 309
+      },
+      "name" : "Concatenate datasets",
+      "uuid" : "3066cee7-ef6a-4a85-86ed-9d9e6b547035",
+      "outputs" : [ {
+        "name" : "out_file1",
+        "type" : "input"
+      } ],
+      "type" : "tool",
+      "tool_version" : "1.0.0",
+      "annotation" : "",
+      "inputs" : [ ],
+      "post_job_actions" : {
+        "HideDatasetActionout_file1" : {
+          "action_arguments" : { },
+          "action_type" : "HideDatasetAction",
+          "output_name" : "out_file1"
+        }
+      },
+      "content_id" : "cat1",
+      "tool_id" : "cat1"
+    },
+    "3" : {
+      "workflow_outputs" : [ {
+        "label" : null,
+        "output_name" : "out_file1",
+        "uuid" : "d0f169a3-ffc3-438f-8a80-a1f260978172"
+      } ],
+      "input_connections" : {
+        "input1" : {
+          "id" : 2,
+          "output_name" : "out_file1"
+        }
+      },
+      "label" : null,
+      "id" : 3,
+      "tool_state" : "{\"algorithms\": [\"md5\", \"sha1\"], \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "errors" : null,
+      "position" : {
+        "left" : 1020.5,
+        "top" : 252
+      },
+      "name" : "Secure Hash / Message Digest",
+      "uuid" : "e35b2d46-a976-4043-9b97-f15150a0a857",
+      "outputs" : [ {
+        "name" : "out_file1",
+        "type" : "tabular"
+      } ],
+      "type" : "tool",
+      "tool_version" : "0.0.2",
+      "annotation" : "",
+      "inputs" : [ ],
+      "post_job_actions" : {
+        "RenameDatasetActionout_file1" : {
+          "action_arguments" : {
+            "newname" : "hash.txt"
+          },
+          "action_type" : "RenameDatasetAction",
+          "output_name" : "out_file1"
+        }
+      },
+      "content_id" : "secure_hash_message_digest",
+      "tool_id" : "secure_hash_message_digest"
+    },
+    "4" : {
+      "workflow_outputs" : [ ],
+      "input_connections" : {
+        "input" : {
+          "id" : 2,
+          "output_name" : "out_file1"
+        }
+      },
+      "label" : null,
+      "id" : 4,
+      "tool_state" : "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"^@\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "errors" : null,
+      "position" : {
+        "left" : 1021.5,
+        "top" : 438
+      },
+      "name" : "Select",
+      "uuid" : "43c30d78-173b-4bc1-ac73-b0c261eec3e5",
+      "outputs" : [ {
+        "name" : "out_file1",
+        "type" : "input"
+      } ],
+      "type" : "tool",
+      "tool_version" : "1.0.1",
+      "annotation" : "",
+      "inputs" : [ ],
+      "post_job_actions" : {
+        "HideDatasetActionout_file1" : {
+          "action_arguments" : { },
+          "action_type" : "HideDatasetAction",
+          "output_name" : "out_file1"
+        }
+      },
+      "content_id" : "Grep1",
+      "tool_id" : "Grep1"
+    },
+    "5" : {
+      "workflow_outputs" : [ {
+        "label" : null,
+        "output_name" : "out_file1",
+        "uuid" : "bf209e76-d7a6-46c6-b18c-26791619e2f5"
+      } ],
+      "input_connections" : {
+        "input1" : {
+          "id" : 4,
+          "output_name" : "out_file1"
+        }
+      },
+      "label" : null,
+      "id" : 5,
+      "tool_state" : "{\"include_header\": \"false\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"options\": [\"lines\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "errors" : null,
+      "position" : {
+        "left" : 1351.5,
+        "top" : 453
+      },
+      "name" : "Line/Word/Character count",
+      "uuid" : "603edce3-b5ef-4abb-b1cf-1445b21ff1ca",
+      "outputs" : [ {
+        "name" : "out_file1",
+        "type" : "tabular"
+      } ],
+      "type" : "tool",
+      "tool_version" : "1.0.0",
+      "annotation" : "",
+      "inputs" : [ {
+        "description" : "runtime parameter for tool Line/Word/Character count",
+        "name" : "input1"
+      } ],
+      "post_job_actions" : {
+        "RenameDatasetActionout_file1" : {
+          "action_arguments" : {
+            "newname" : "read-count.txt"
+          },
+          "action_type" : "RenameDatasetAction",
+          "output_name" : "out_file1"
+        }
+      },
+      "content_id" : "wc_gnu",
+      "tool_id" : "wc_gnu"
+    }
+  },
+  "tags" : [ ],
+  "uuid" : "7aba05d4-38b9-4503-8e01-a9403f5a5542",
+  "version" : 1
+}

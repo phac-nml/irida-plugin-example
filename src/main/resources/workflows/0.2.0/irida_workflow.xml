@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iridaWorkflow>
+  <id>77708005-f855-44c9-bd0b-8293edbd4caa</id>
+  <name>ReadInfo</name>
+  <version>0.2.0</version>
+  <analysisType>READ_INFO</analysisType>
+  <inputs>
+    <sequenceReadsPaired>sequence_reads</sequenceReadsPaired>
+    <requiresSingleSample>true</requiresSingleSample>
+  </inputs>
+  <parameters>
+    <parameter name="Grep1-4-pattern" defaultValue="^@">
+      <toolParameter toolId="43c30d78-173b-4bc1-ac73-b0c261eec3e5" parameterName="pattern"/>
+    </parameter>
+  </parameters>
+  <outputs>
+    <output name="hash.txt" fileName="hash.txt"/>
+    <output name="read-count.txt" fileName="read-count.txt"/>
+  </outputs>
+  <toolRepositories/>
+</iridaWorkflow>
