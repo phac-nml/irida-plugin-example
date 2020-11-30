@@ -2,7 +2,7 @@
 <iridaWorkflow>
   <id>77708005-f855-44c9-bd0b-8293edbd4caa</id>
   <name>ReadInfo</name>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <analysisType>READ_INFO</analysisType>
   <inputs>
     <sequenceReadsPaired>sequence_reads</sequenceReadsPaired>
