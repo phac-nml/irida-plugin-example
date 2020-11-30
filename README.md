@@ -310,7 +310,7 @@ The `properties` section contains additional information you will have to update
 <plugin.version>0.1.0</plugin.version>
 <plugin.provider>Aaron Petkau</plugin.provider>
 <plugin.dependencies></plugin.dependencies>
-<plugin.requires.runtime>1.0.0</plugin.requires.runtime>
+<plugin.requires.runtime>1.1.0</plugin.requires.runtime>
 
 <irida.version.compiletime>21.01</irida.version.compiletime>
 ```
